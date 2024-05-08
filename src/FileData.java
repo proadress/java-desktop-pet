@@ -1,6 +1,6 @@
 import java.io.*;
 import java.util.Properties;
-
+//filedata
 public class FileData {
     private static final String settingsFile = "settings.properties";
     private static Properties settings;
@@ -12,7 +12,7 @@ public class FileData {
         if (!file.exists()) {
             try {
                 file.createNewFile();
-                // Add default settings here
+                // Add default settings here 
                 settings.setProperty("example_setting", "default_value");
                 // You can add more default settings here
                 saveSettings();
