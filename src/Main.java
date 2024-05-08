@@ -6,13 +6,13 @@ import java.util.Properties;
 public class Main {
     private static TrayIcon trayIcon;
     final static String picture = "computer.png";
-//    FileData file = new FileData();
+//    FileData file = new FileData()
 
     public static void main(String[] args) {
         if (SystemTray.isSupported()) {
             setupSystemTray();
         } else {
-            System.out.println("System tray is not supported");
+            System.out.println("System tray is not supported!!!");
         }
 
         // simulate a state change
