@@ -7,7 +7,7 @@ public class Main {
     private static TrayIcon trayIcon;
     final static String picture = "computer.png";
 //    FileData file  = new FileData()
-
+ 
     public static void main(String[] args) {
         if (SystemTray.isSupported()) {
             setupSystemTray();
