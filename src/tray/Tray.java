@@ -1,26 +1,23 @@
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Properties;
+package tray;
 
-public class Main {
+import java.awt.*;
+import java.awt.event.ActionListener;
+
+public class Tray {
     private static TrayIcon trayIcon;
-    final static String picture = "computer.png";
-//    FileData file  = new FileData()
- 
-    public static void main(String[] args) {
+    final String picture;
+    public Tray(){
+        picture = "computer.png";
+
         if (SystemTray.isSupported()) {
             setupSystemTray();
         } else {
             System.out.println("System tray is not supported!!!");
         }
-
         // simulate a state change
         updateTrayIconImage();
-        FileData.loadSettings();
     }
-
-    private static void setupSystemTray() {
+    private void setupSystemTray() {
         SystemTray tray = SystemTray.getSystemTray();
         Image image = Toolkit.getDefaultToolkit().getImage(picture);
 
@@ -57,10 +54,10 @@ public class Main {
         MenuItem item2 = new MenuItem("save");
         item2.addActionListener(e -> {
             System.out.println("Option 2 selected");
-            FileData.setSetting("example_setting", "new_value");
+            mainProcess.FileData.setSetting("example_setting", "new_value");
 
             // Get a setting value
-            String exampleSetting = FileData.getSetting("example_setting");
+            String exampleSetting = mainProcess.FileData.getSetting("example_setting");
             System.out.println("Setting example_setting: " + exampleSetting);
         });
 
@@ -80,7 +77,7 @@ public class Main {
     }
 
 
-    private static void updateTrayIconImage() {
+    private void updateTrayIconImage() {
         if (trayIcon != null) {
             Image updatedImage = Toolkit.getDefaultToolkit().getImage(picture);
             trayIcon.setImage(updatedImage);
