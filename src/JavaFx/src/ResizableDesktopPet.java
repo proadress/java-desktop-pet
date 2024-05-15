@@ -15,8 +15,8 @@ public class ResizableDesktopPet extends JFrame {
         setSize(width, height);
 
         petLabel = new JLabel();
-        ImageIcon normalIcon = new ImageIcon("C:/Users/user/Desktop/java-desktop-pet/2.png");
-        ImageIcon hoverIcon = new ImageIcon("C:/Users/user/Desktop/java-desktop-pet/1.png");
+        ImageIcon normalIcon = new ImageIcon("2.png");
+        ImageIcon hoverIcon = new ImageIcon("1.png");
         // 調整圖片大小
         Image scaledNormalImage = normalIcon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
         Image scaledHoverImage = hoverIcon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);

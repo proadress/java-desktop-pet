@@ -7,9 +7,9 @@ public class Main {
 //    main_process.FileData file  = new main_process.FileData()
  
     public static void main(String[] args) {
-        tray.Tray tray = new tray.Tray();
         FileData.loadSettings();
+        tray.Tray tray = new tray.Tray();
+        //JavaFx.src.ResizableDesktopPet pet = new JavaFx.src.ResizableDesktopPet();
+        // TODO
     }
-
-
 }
