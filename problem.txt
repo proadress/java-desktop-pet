@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 Exception in Application start method
 
 java.lang.reflect.InvocationTargetException
@@ -24,7 +25,9 @@ fx:controller="application.DrawLinesController"
 
 
 
-
-
 https://blog.51cto.com/u_16099190/6331597
 https://www.cnblogs.com/stars-one/p/10959869.html
+=======
+Exception in Application start method
+
+>>>>>>> Stashed changes
