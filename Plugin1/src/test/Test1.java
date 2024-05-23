@@ -1,4 +1,6 @@
-package plugin;
+package test;
+
+import plugin.Plugin;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -8,7 +10,7 @@ public class Test1 implements Plugin {
 
     @Override
     public void run() {
-        System.out.println("run");
+        System.out.println("test run");
     }
 
     @Override

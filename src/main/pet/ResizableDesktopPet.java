@@ -1,4 +1,4 @@
-package main.src;
+package main.pet;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,15 +6,21 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class ResizableDesktopPet extends JFrame {
-    private final JLabel petLabel;
+    private final JLabel petLabel = new JLabel();
     private Point mouseOffset;
 
     public ResizableDesktopPet(int width, int height) {
+        create(width, height);
+    }
+
+    public ResizableDesktopPet() {
+        create(300, 400);
+    }
+
+    public void create(int width, int height) {
         setUndecorated(true);
         setBackground(new Color(0, 0, 0, 0));
         setSize(width, height);
-
-        petLabel = new JLabel();
         ImageIcon normalIcon = new ImageIcon("2.png");
         ImageIcon hoverIcon = new ImageIcon("1.png");
         // 調整圖片大小
@@ -64,7 +70,7 @@ public class ResizableDesktopPet extends JFrame {
         setVisible(true);
     }
 
-    public static void main(String[] args) {
+    public void start() {
         SwingUtilities.invokeLater(() -> new ResizableDesktopPet(300, 400));
     }
 }

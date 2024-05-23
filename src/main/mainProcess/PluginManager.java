@@ -1,4 +1,6 @@
-package mainProcess;// PluginManager.java
+package main.mainProcess;// PluginManager.java
+
+import plugin.Plugin;
 
 import java.io.File;
 import java.net.URL;
@@ -7,21 +9,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ServiceLoader;
 
-
 public class PluginManager {
-    private final List<Plugin> plugins = new ArrayList<>();
+    public final List<Plugin> plugins = new ArrayList<>();
     private final File pluginDir;
 
     public PluginManager(String pluginDirPath) {
         this.pluginDir = new File(pluginDirPath);
+        if (!pluginDir.exists()) {
+            pluginDir.mkdirs();
+        }
     }
 
     public void loadPlugins() throws Exception {
         for (File file : pluginDir.listFiles()) {
-            System.out.println("find fild");
             if (file.isFile() && file.getName().endsWith(".jar")) {
-                System.out.println("is jar");
-
+                System.out.println(file.toURI().toURL());
                 URLClassLoader loader = new URLClassLoader(new URL[]{file.toURI().toURL()}, getClass().getClassLoader());
                 ServiceLoader<Plugin> serviceLoader = ServiceLoader.load(Plugin.class, loader);
                 for (Plugin plugin : serviceLoader) {

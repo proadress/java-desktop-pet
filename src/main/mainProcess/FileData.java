@@ -1,7 +1,8 @@
-package mainProcess;
+package main.mainProcess;
 
 import java.io.*;
 import java.util.Properties;
+
 public class FileData {
     private static final String settingsFile = "settings.properties";
     private static Properties settings;

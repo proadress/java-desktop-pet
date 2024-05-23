@@ -1,23 +1,33 @@
-package mainProcess;
+package main.mainProcess;
+
+import main.tray.Tray;
 
 import java.awt.*;
 
 public class Main {
     private static TrayIcon trayIcon;
     final static String picture = "computer.png";
-//    main_process.FileData file  = new main_process.FileData()
+//    FileData file = new FileData();
 
     public static void main(String[] args) throws Exception {
 //        FileData.loadSettings();
-//        tray.Tray tray = new tray.Tray();
+//        main.tray.Tray main.tray = new main.tray.Tray();
+        Tray tray;
         try {
-            PluginManager pluginManager = new PluginManager("out/artifacts/java_desktop_pet_jar");
+            PluginManager pluginManager = new PluginManager("out/artifacts");
             pluginManager.loadPlugins();
             pluginManager.executePlugins();
+//            pluginManager.plugins.get(0).run();
+            if (pluginManager.plugins.isEmpty()) {
+                tray = new Tray();
+            } else {
+                tray = new Tray(pluginManager.plugins.get(0));
+            }
+            tray.start();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //JavaFx.src.ResizableDesktopPet pet = new JavaFx.src.ResizableDesktopPet();
+//        ResizableDesktopPet pet = new ResizableDesktopPet();
         // TODO
     }
 }
