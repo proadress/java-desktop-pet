@@ -1,6 +1,4 @@
-package tray;
-
-import mainProcess.FileData;
+package main.tray;
 
 public class TrayTest {
     public static void main(String[] args) {

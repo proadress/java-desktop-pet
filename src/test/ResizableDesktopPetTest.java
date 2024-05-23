@@ -1,6 +1,4 @@
-package JavaFx.src;
-
-import javax.swing.*;
+package main.pet;
 
 public class ResizableDesktopPetTest {
     // TODO

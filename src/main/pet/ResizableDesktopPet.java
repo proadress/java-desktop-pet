@@ -1,4 +1,4 @@
-package JavaFx.src;
+package main.src;
 
 import javax.swing.*;
 import java.awt.*;
