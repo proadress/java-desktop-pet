@@ -1,3 +1,5 @@
+package plugin;
+
 import java.awt.*;
 import java.util.List;
 

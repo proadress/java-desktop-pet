@@ -4,59 +4,62 @@ import java.io.*;
 import java.util.Properties;
 
 public class FileData {
-    private static final String settingsFile = "settings.properties";
-    private static Properties settings;
+    private static final String SETTINGS_FILE = "settings.properties";
+    private static final Properties settings = new Properties();
 
     public static void loadSettings() {
-        settings = new Properties();
-        File file = new File(settingsFile);
+        File file = new File(SETTINGS_FILE);
 
         if (!file.exists()) {
             try {
-                file.createNewFile();
-                // Add default settings here 
-                settings.setProperty("example_setting", "default_value");
-                // You can add more default settings here
-                saveSettings();
-                System.out.println("create");
+                if (file.createNewFile()) {
+                    saveSettings();
+                    System.out.println("Settings file created.");
+                }
             } catch (IOException e) {
                 System.err.println("Error creating settings file: " + e.getMessage());
             }
         } else {
-            try (InputStream input = new FileInputStream(settingsFile)) {
+            try (InputStream input = new FileInputStream(SETTINGS_FILE)) {
                 settings.load(input);
-                // Example: Retrieve a setting
-                String exampleSetting = settings.getProperty("example_setting");
-                System.out.println("Loaded setting: " + exampleSetting);
-                // You can add more settings retrieval here
+                printAllSettings();
             } catch (IOException e) {
                 System.err.println("Error loading settings: " + e.getMessage());
             }
         }
     }
 
-    public static void saveSettings() {
-        try (OutputStream output = new FileOutputStream(settingsFile)) {
+    private static void saveSettings() {
+        try (OutputStream output = new FileOutputStream(SETTINGS_FILE)) {
             settings.store(output, "Application Settings");
         } catch (IOException e) {
             System.err.println("Error saving settings: " + e.getMessage());
         }
     }
 
-    // Add method to set or update a setting
+    // Method to set or update a setting
     public static void setSetting(String key, String value) {
         settings.setProperty(key, value);
         saveSettings(); // Save settings after updating
+        System.out.println("Success creat: " + key + "=" + value);
     }
 
-    // Add method to get a setting value
+    // Method to get a setting value
     public static String getSetting(String key) {
         return settings.getProperty(key);
     }
 
-    // Add method to delete a setting
+    // Method to delete a setting
     public static void deleteSetting(String key) {
         settings.remove(key);
         saveSettings(); // Save settings after deleting
+        System.out.println("Success remove: " + key);
+    }
+
+    // Method to print all settings
+    private static void printAllSettings() {
+        System.out.println("\n*** LOADing FILE ***");
+        settings.forEach((key, value) -> System.out.println(key + ": " + value));
+        System.out.println();
     }
 }

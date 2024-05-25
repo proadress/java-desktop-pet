@@ -1,2 +1,7 @@
-package plugin;public @interface PetPlugin {
+package plugin;
+
+public interface PetPlugin {
+    String getName();
+
+    void build();
 }

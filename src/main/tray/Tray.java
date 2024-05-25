@@ -1,99 +1,76 @@
 package main.tray;
 
-import plugin.Plugin;
-
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.List;
 
 public class Tray {
-    private static TrayIcon trayIcon;
-    final String picture;
-    List<MenuItem> plugin;
+    private static volatile Tray instance;
+    private TrayIcon trayIcon;
+    private String picture = "computer.png"; // make picture non-final to update it
+    private final ActionListener defaultListener = e -> {
+        System.out.println("預設動作");
+    };
 
-    public Tray() {
-        picture = "computer.png";
+    private Tray() {
     }
 
-    public Tray(Plugin plugin) {
-        picture = "computer.png";
-        this.plugin = plugin.getMenuItems();
+    public static Tray getInstance() {
+        if (instance == null) {
+            synchronized (Tray.class) {
+                if (instance == null) {
+                    instance = new Tray();
+                }
+            }
+        }
+        return instance;
     }
 
-    public void start() {
+    public void start(List<MenuItem> menuItemList) {
         if (SystemTray.isSupported()) {
-            setupSystemTray();
+            SystemTray systemTray = SystemTray.getSystemTray();
+            Image image = Toolkit.getDefaultToolkit().getImage(picture);
+
+            PopupMenu popup = createPopupMenu(menuItemList);
+
+            trayIcon = new TrayIcon(image, "Tray Demo", popup);
+            trayIcon.setImageAutoSize(true);
+            trayIcon.addActionListener(defaultListener);
+
+            try {
+                systemTray.add(trayIcon);
+            } catch (AWTException e) {
+                System.err.println("Unable to add to system tray: " + e.getMessage());
+            }
         } else {
-            System.out.println("System main.tray is not supported!!!");
-        }
-        updateTrayIconImage();
-    }
-
-    private void setupSystemTray() {
-        SystemTray tray = SystemTray.getSystemTray();
-        Image image = Toolkit.getDefaultToolkit().getImage(picture);
-
-        ActionListener listener = e -> {
-            // execute default action of the application
-            System.out.println("Default action executed");
-        };
-
-        PopupMenu popup = createPopupMenu(listener);
-
-        trayIcon = new TrayIcon(image, "Tray Demo", popup);
-        trayIcon.setImageAutoSize(true);  // set image auto size to true
-
-        trayIcon.addActionListener(listener);
-
-        try {
-            tray.add(trayIcon);
-        } catch (AWTException e) {
-            System.err.println(e);
+            System.out.println("System tray is not supported!!!");
         }
     }
 
-    private PopupMenu createPopupMenu(ActionListener listener) {
+    private PopupMenu createPopupMenu(List<MenuItem> menuItemList) {
         PopupMenu popup = new PopupMenu();
 
         MenuItem defaultItem = new MenuItem("Default Action");
-        defaultItem.addActionListener(listener);
+        defaultItem.addActionListener(defaultListener);
 
-        MenuItem item1 = new MenuItem("Option 1");
-        item1.addActionListener(e -> System.out.println("Option 1 selected"));
+        MenuItem exit = new MenuItem("Exit");
+        exit.addActionListener(e -> System.exit(0));
 
-        MenuItem item2 = new MenuItem("save");
-        item2.addActionListener(e -> {
-            System.out.println("Option 2 selected");
-            main.mainProcess.FileData.setSetting("example_setting", "new_value");
-
-            // Get a setting value
-            String exampleSetting = main.mainProcess.FileData.getSetting("example_setting");
-            System.out.println("Setting example_setting: " + exampleSetting);
-        });
-
-        MenuItem item3 = new MenuItem("exit");
-        item3.addActionListener(e -> System.exit(0));
-
-        // add items to the popup menu
         popup.add(defaultItem);
-        popup.addSeparator();  // adds a separator line
-        popup.add(item1);
-        popup.add(item2);
-        popup.add(item3);
-        if (plugin != null) {
-            for (MenuItem menuItem : plugin) {
-                popup.add(menuItem);
-            }
-
-            return popup;
+        popup.addSeparator();
+        for (MenuItem item : menuItemList) {
+            popup.add(item);
         }
+        popup.addSeparator();
+        popup.add(exit);
+
         return popup;
     }
 
-
-    private void updateTrayIconImage() {
+    public void updateTrayIconImage(String newPicture) {
         if (trayIcon != null) {
-            Image updatedImage = Toolkit.getDefaultToolkit().getImage(picture);
+            picture = newPicture; // Update the picture path
+            Image updatedImage = Toolkit.getDefaultToolkit().getImage(newPicture);
             trayIcon.setImage(updatedImage);
         }
     }

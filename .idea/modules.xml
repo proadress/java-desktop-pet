@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Plugin1/Plugin1.iml" filepath="$PROJECT_DIR$/Plugin1/Plugin1.iml" />
       <module fileurl="file://$PROJECT_DIR$/PluginInterface/PluginInterface.iml" filepath="$PROJECT_DIR$/PluginInterface/PluginInterface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PluginPetMove/PluginPetMove.iml" filepath="$PROJECT_DIR$/PluginPetMove/PluginPetMove.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PluginTrayAid/PluginTrayAid.iml" filepath="$PROJECT_DIR$/PluginTrayAid/PluginTrayAid.iml" />
       <module fileurl="file://$PROJECT_DIR$/java-desktop-pet.iml" filepath="$PROJECT_DIR$/java-desktop-pet.iml" />
     </modules>
   </component>
