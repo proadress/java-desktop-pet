@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="PluginPetMove:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/pet</output-path>
+    <root id="archive" name="PluginPetMove.jar">
+      <element id="module-output" name="PluginPetMove" />
+      <element id="module-output" name="PluginInterface" />
+    </root>
+  </artifact>
+</component>

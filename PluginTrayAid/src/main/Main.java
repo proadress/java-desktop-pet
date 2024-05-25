@@ -1,16 +1,18 @@
-package test;
-
-import plugin.Plugin;
-
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Test1 implements Plugin {
+public class main implements TrayPlugin {
+    public String name = "aid plug";
 
     @Override
-    public void run() {
-        System.out.println("test run");
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void build() {
+        System.out.println("building" + name);
     }
 
     @Override
@@ -29,7 +31,6 @@ public class Test1 implements Plugin {
         menuItems.add(item2);
         return menuItems;
     }
-
 
     public static void main(String[] args) {
 

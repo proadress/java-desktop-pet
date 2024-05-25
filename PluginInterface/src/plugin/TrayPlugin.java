@@ -1,11 +1,10 @@
-package plugin;
-
-
 import java.awt.*;
 import java.util.List;
 
-public interface Plugin {
-    void run();
+public interface TrayPlugin {
+    String getName();
+
+    void build();
 
     List<MenuItem> getMenuItems();
 }
