@@ -8,5 +8,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="PluginInterface" />
+    <orderEntry type="library" name="io.github.palexdev.materialfx" level="project" />
+    <orderEntry type="library" name="lib" level="project" />
   </component>
 </module>
