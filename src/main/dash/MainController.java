@@ -1,14 +1,10 @@
-package dash;
+package main.dash;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
 
 import java.awt.*;
 import java.io.IOException;
@@ -17,7 +13,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class mainController implements Initializable {
+public class MainController implements Initializable {
 
     @FXML
     private Label exit;
@@ -29,6 +25,7 @@ public class mainController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         try {
+            //初始次視窗為Home
             Parent fxml = FXMLLoader.load(getClass().getResource("Home.fxml"));
             contentArea.getChildren().removeAll();
             contentArea.getChildren().setAll(fxml);
@@ -38,6 +35,7 @@ public class mainController implements Initializable {
 
     }
 
+    //切換次視窗
     public void home(javafx.event.ActionEvent actionEvent) throws IOException{
         Parent fxml = FXMLLoader.load(getClass().getResource("Home.fxml"));
         contentArea.getChildren().removeAll();
@@ -45,7 +43,7 @@ public class mainController implements Initializable {
     }
 
     public void Time(javafx.event.ActionEvent actionEvent) throws IOException{
-        Parent fxml = FXMLLoader.load(getClass().getResource("Time.fxml"));
+        Parent fxml = FXMLLoader.load(getClass().getResource("Setting.fxml"));
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(fxml);
     }

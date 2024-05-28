@@ -1,4 +1,4 @@
-package dash;
+package main.dash;
 
 public class Home {
 }

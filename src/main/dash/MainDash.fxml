@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="684.0" prefWidth="1038.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.dash.MainController">
+   <top>
+      <Pane prefHeight="61.0" prefWidth="1038.0" style="-fx-background-color: Gainsboro;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="77.0" layoutY="14.0" text="DeskPet">
+               <font>
+                  <Font name="Britannic Bold" size="36.0" />
+               </font></Label>
+         </children></Pane>
+   </top>
+   <left>
+      <Pane prefHeight="596.0" prefWidth="270.0" style="-fx-background-color: GRAY;" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER" layoutY="-1.0" prefHeight="623.0" prefWidth="270.0" spacing="20.0">
+               <children>
+                  <MFXButton buttonType="RAISED" onAction="#home" prefHeight="50.0" prefWidth="197.0" style="-fx-background-color: #AAB2BD; -fx-font-family: DM Sans;" text="Home">
+                     <font>
+                        <Font name="Arial" size="18.0" />
+                     </font></MFXButton>
+                  <MFXButton buttonType="RAISED" layoutX="10.0" layoutY="10.0" onAction="#Alert" prefHeight="50.0" prefWidth="197.0" style="-fx-background-color: #AAB2BD; -fx-font-family: DM Sans;" text="Alert">
+                     <font>
+                        <Font size="18.0" />
+                     </font></MFXButton>
+                  <MFXButton buttonType="RAISED" layoutX="10.0" layoutY="60.0" onAction="#Time" prefHeight="50.0" prefWidth="197.0" style="-fx-background-color: #AAB2BD; -fx-font-family: DM Sans;" text="Setting">
+                     <font>
+                        <Font size="18.0" />
+                     </font></MFXButton>
+               </children>
+            </VBox>
+         </children>
+      </Pane>
+   </left>
+   <center>
+      <StackPane fx:id="contentArea" prefHeight="536.0" prefWidth="733.0" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>
