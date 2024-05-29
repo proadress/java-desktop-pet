@@ -28,11 +28,15 @@ public class Setting {
     void addFile(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         //指定只能打開何種檔案類型
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
-        fileChooser.getExtensionFilters().add(extFilter);
+
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("FXMl", "*.fxml"),
+                new FileChooser.ExtensionFilter("JAVA", "*.java")
+        );
+
         File file = fileChooser.showOpenDialog(stage);
         jarList.getItems().add(String.valueOf(file));
-        System.out.println(file);
+
     }
 
     @FXML
