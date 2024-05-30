@@ -1,4 +1,4 @@
-package main;
+package main.pet;
 
 import plugin.PetPlugin;
 
@@ -7,7 +7,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main implements PetPlugin {
+public class Person1 implements PetPlugin {
     private List<ImageIcon> animationFrames;
     private final int imageCount = 6;
     private final int windowWidth = 100;
@@ -26,7 +26,7 @@ public class Main implements PetPlugin {
         // 載入並調整右移動動畫幀（1.png至6.png）
         animationFrames = new ArrayList<>();
         for (int i = 0; i < imageCount; i++) {
-            ImageIcon icon = new ImageIcon("picture\\"+ (i + 1) + ".png"); // 更新為您的圖片路徑
+            ImageIcon icon = new ImageIcon("picture\\"+ "0019" +".png"); // 更新為您的圖片路徑
             Image scaledImage = icon.getImage().getScaledInstance(windowWidth, windowHeight, Image.SCALE_SMOOTH);
             animationFrames.add(new ImageIcon(scaledImage)) ;
         }

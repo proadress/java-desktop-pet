@@ -1,13 +1,13 @@
-package main;
+package main.pet;
 
 import plugin.PetPlugin;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.List;
-
-public class Main implements PetPlugin {
+public class DogAnimation implements PetPlugin {
     private List<ImageIcon> animationFrames;
     private final int imageCount = 6;
     private final int windowWidth = 100;
