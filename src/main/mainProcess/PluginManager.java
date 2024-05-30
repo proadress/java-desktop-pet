@@ -46,8 +46,6 @@ public class PluginManager {
                     System.out.println(file.toURI().toURL());
                     URLClassLoader loader = new URLClassLoader(new URL[]{file.toURI().toURL()}, getClass().getClassLoader());
                     ServiceLoader<T> serviceLoader = ServiceLoader.load(pluginClass, loader);
-                    System.out.println(serviceLoader);
-                    System.out.println(pluginList);
                     for (T plugin : serviceLoader) {
                         System.out.println("***Load Plugin: " + plugin.getClass().getName());
                         pluginList.add(plugin);

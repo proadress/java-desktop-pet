@@ -3,7 +3,6 @@ package main.tray;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.List;
-import main.dash.MainDash;
 
 public class Tray {
     private static volatile Tray instance;
@@ -11,11 +10,6 @@ public class Tray {
     private String picture = "computer.png"; // make picture non-final to update it
     private final ActionListener defaultListener = e -> {
         System.out.println("預設動作");
-    };
-
-    private final ActionListener guiListener = e -> {
-        String[] args = new String[0];
-        MainDash.main(args);
     };
 
     private Tray() {
@@ -62,19 +56,14 @@ public class Tray {
         MenuItem exit = new MenuItem("Exit");
         exit.addActionListener(e -> System.exit(0));
 
-        MenuItem uiFace = new MenuItem("open GUI");
-        uiFace.addActionListener(guiListener);
-
         popup.add(defaultItem);
         popup.addSeparator();
         for (MenuItem item : menuItemList) {
             popup.add(item);
         }
-        popup.add(uiFace);
         popup.addSeparator();
         popup.add(exit);
-
-
+        
         return popup;
     }
 

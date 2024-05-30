@@ -1,6 +1,5 @@
 package main.mainProcess;
 
-import main.pet.DogAnimation;
 import main.pet.ResizableDesktopPet;
 import main.tray.Tray;
 import plugin.PetPlugin;
@@ -14,7 +13,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
         FileData.loadSettings();
         List<MenuItem> menuItems = new ArrayList<>();
-        List<ResizableDesktopPet> pets = new ArrayList<>();
+//        ResizableDesktopPet pet;
 
         PluginManager pluginManager = new PluginManager("out/artifacts/tray");
         for (TrayPlugin trayPlugin : pluginManager.getTrayPlugins()) {
@@ -23,8 +22,9 @@ public class Main {
         Tray tray = Tray.getInstance();
         tray.start(menuItems);
         pluginManager = new PluginManager("out/artifacts/pet");
-        for(PetPlugin plugin : pluginManager.getPetPlugins()){
-             pets.add(new ResizableDesktopPet(plugin));
+        for (PetPlugin plugin : pluginManager.getPetPlugins()) {
+            ResizableDesktopPet pet = new ResizableDesktopPet(plugin);
+            pet.setMoveSpeed(5, 5);
         }
     }
 }

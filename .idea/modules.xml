@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Alert.iml" filepath="$PROJECT_DIR$/Alert.iml" />
       <module fileurl="file://$PROJECT_DIR$/PluginInterface/PluginInterface.iml" filepath="$PROJECT_DIR$/PluginInterface/PluginInterface.iml" />
       <module fileurl="file://$PROJECT_DIR$/PluginPetMove/PluginPetMove.iml" filepath="$PROJECT_DIR$/PluginPetMove/PluginPetMove.iml" />
       <module fileurl="file://$PROJECT_DIR$/PluginTrayAid/PluginTrayAid.iml" filepath="$PROJECT_DIR$/PluginTrayAid/PluginTrayAid.iml" />

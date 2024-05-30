@@ -26,15 +26,15 @@ public class Main implements PetPlugin {
         // 載入並調整右移動動畫幀（1.png至6.png）
         animationFrames = new ArrayList<>();
         for (int i = 0; i < imageCount; i++) {
-            ImageIcon icon = new ImageIcon("picture\\"+ (i + 1) + ".png"); // 更新為您的圖片路徑
+            ImageIcon icon = new ImageIcon("picture/" + (i + 1) + ".png"); // 更新為您的圖片路徑
             Image scaledImage = icon.getImage().getScaledInstance(windowWidth, windowHeight, Image.SCALE_SMOOTH);
-            animationFrames.add(new ImageIcon(scaledImage)) ;
+            animationFrames.add(new ImageIcon(scaledImage));
         }
     }
 
     @Override
     public ImageIcon getImage() {
-        int temp = currentFrameIndex/delay;
+        int temp = currentFrameIndex / delay;
         currentFrameIndex = (currentFrameIndex + 1) % (imageCount * delay);
         return animationFrames.get(temp);
     }

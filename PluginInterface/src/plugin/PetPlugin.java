@@ -6,6 +6,7 @@ public interface PetPlugin {
     String getName();
 
     void build();
+
     ImageIcon getImage();
 
 
