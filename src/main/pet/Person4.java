@@ -29,7 +29,7 @@ public class Person4 implements PetPlugin {
         animationFrames = new ArrayList<>();
         try {
             // 讀取原始圖片
-            BufferedImage originalImage = ImageIO.read(new File("picture\\0109.png"));
+            BufferedImage originalImage = ImageIO.read(new File("picture/0109.png"));
 
             // 獲取原始圖片的寬度和高度
             int imageWidth = originalImage.getWidth();
