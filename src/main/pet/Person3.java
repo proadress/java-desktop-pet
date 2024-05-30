@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person1 implements PetPlugin {
+public class Person3 implements PetPlugin {
     private List<ImageIcon> animationFrames;
     private final int frameCount = 32;  // 32个图片
     private final int windowWidth = 100;
@@ -29,7 +29,7 @@ public class Person1 implements PetPlugin {
         animationFrames = new ArrayList<>();
         try {
             // 讀取原始圖片
-            BufferedImage originalImage = ImageIO.read(new File("picture\\0019.png"));
+            BufferedImage originalImage = ImageIO.read(new File("picture\\0099.png"));
 
             // 獲取原始圖片的寬度和高度
             int imageWidth = originalImage.getWidth();
