@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="PluginPetTrayCostomize:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/tray</output-path>
+    <root id="archive" name="PluginPetTrayCostomize.jar">
+      <element id="module-output" name="PluginPetTrayCostomize" />
+      <element id="module-output" name="PluginInterface" />
+    </root>
+  </artifact>
+</component>

@@ -1,6 +1,6 @@
 package main;
 
-
+import main.tray.Tray;
 import plugin.TrayPlugin;
 
 import java.awt.*;
@@ -28,8 +28,11 @@ public class Main implements TrayPlugin {
     @Override
     public List<MenuItem> getMenuItems() {
         List<MenuItem> items = new ArrayList<>();
-        MenuItem item = new MenuItem("option 1");
-        item.addActionListener(e -> System.out.println("123"));
+        MenuItem item = new MenuItem("aid pic");
+        item.addActionListener(e -> {
+            Tray tray = Tray.getInstance();
+            tray.updateTrayIconImage("aid.png");
+        });
         items.add(item);
         return items;
     }

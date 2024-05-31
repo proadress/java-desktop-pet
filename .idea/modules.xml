@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/PluginInterface/PluginInterface.iml" filepath="$PROJECT_DIR$/PluginInterface/PluginInterface.iml" />
       <module fileurl="file://$PROJECT_DIR$/PluginPetMove/PluginPetMove.iml" filepath="$PROJECT_DIR$/PluginPetMove/PluginPetMove.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PluginPetTrayCostomize/PluginPetTrayCostomize.iml" filepath="$PROJECT_DIR$/PluginPetTrayCostomize/PluginPetTrayCostomize.iml" />
       <module fileurl="file://$PROJECT_DIR$/PluginTrayAid/PluginTrayAid.iml" filepath="$PROJECT_DIR$/PluginTrayAid/PluginTrayAid.iml" />
       <module fileurl="file://$PROJECT_DIR$/java-desktop-pet.iml" filepath="$PROJECT_DIR$/java-desktop-pet.iml" />
     </modules>
