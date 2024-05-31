@@ -22,9 +22,10 @@ public class Main {
         Tray tray = Tray.getInstance();
         tray.start(menuItems);
         pluginManager = new PluginManager("out/artifacts/pet");
+        int y = 1;
         for (PetPlugin plugin : pluginManager.getPetPlugins()) {
             ResizableDesktopPet pet = new ResizableDesktopPet(plugin);
-            pet.setMoveSpeed(5, 5);
+            pet.setMoveSpeed(1, y++);
         }
     }
 }
