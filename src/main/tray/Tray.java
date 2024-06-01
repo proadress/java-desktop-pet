@@ -3,6 +3,7 @@ package main.tray;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
@@ -21,10 +22,9 @@ public class Tray {
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
                 "JAR", "jar");
         fileChooser.setFileFilter(filter);
-
+        fileChooser.setDialogTitle("選擇新增檔案");
         int returnValue = fileChooser.showOpenDialog(null);//叫出filechooser
-        if (returnValue == JFileChooser.APPROVE_OPTION) //判斷是否選擇檔案
-        {
+        if (returnValue == JFileChooser.APPROVE_OPTION) { //判斷是否選擇檔案
             File selectedFile = fileChooser.getSelectedFile();//指派給File
             File destinationFile = new File("out/artifacts/tray/" + selectedFile.getName());
             System.out.println(selectedFile.getName()); //印出檔名
@@ -78,10 +78,39 @@ public class Tray {
         MenuItem defaultItem = new MenuItem("Load JAR");
         defaultItem.addActionListener(defaultListener);
 
+        MenuItem deleteItem = new MenuItem("Delete JAR");
+
+        deleteItem.addActionListener(e -> {
+            JFileChooser fileChooser1 = new JFileChooser();
+            //指定只能打開何種檔案類型
+
+            FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                    "JAR", "jar");
+            fileChooser1.setFileFilter(filter);
+
+            fileChooser1.setDialogTitle("選擇刪除檔案");
+
+            int result = fileChooser1.showOpenDialog(null);
+
+            if (result == JFileChooser.APPROVE_OPTION) {
+                // 取得選擇的檔案
+                File selectedFile = fileChooser1.getSelectedFile();
+                // 刪除檔案
+                if (selectedFile.delete()) {
+                    JOptionPane.showMessageDialog(null, "檔案已成功刪除: " + selectedFile.getAbsolutePath());
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "檔案刪除失敗");
+                }
+            }
+        });
+
         MenuItem exit = new MenuItem("Exit");
         exit.addActionListener(e -> System.exit(0));
 
         popup.add(defaultItem);
+        popup.addSeparator();
+        popup.add(deleteItem);
         popup.addSeparator();
         for (MenuItem item : menuItemList) {
             popup.add(item);
