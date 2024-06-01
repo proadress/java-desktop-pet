@@ -1,7 +1,13 @@
 package main.tray;
 
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 public class Tray {
@@ -9,7 +15,26 @@ public class Tray {
     private TrayIcon trayIcon;
     private String picture = "computer.png"; // make picture non-final to update it
     private final ActionListener defaultListener = e -> {
-        System.out.println("預設動作");
+        JFileChooser fileChooser = new JFileChooser();
+        //指定只能打開何種檔案類型
+
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "JAR", "jar");
+        fileChooser.setFileFilter(filter);
+
+        int returnValue = fileChooser.showOpenDialog(null);//叫出filechooser
+        if (returnValue == JFileChooser.APPROVE_OPTION) //判斷是否選擇檔案
+        {
+            File selectedFile = fileChooser.getSelectedFile();//指派給File
+            File destinationFile = new File("out/artifacts/tray/" + selectedFile.getName());
+            System.out.println(selectedFile.getName()); //印出檔名
+            try{
+                Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                JOptionPane.showMessageDialog(null, "檔案已成功存至: " + destinationFile.getAbsolutePath());
+            }catch (IOException ex){
+                JOptionPane.showMessageDialog(null, "檔案存取失敗: " + ex.getMessage());
+            }
+        }
     };
 
     private Tray() {
@@ -50,7 +75,7 @@ public class Tray {
     private PopupMenu createPopupMenu(List<MenuItem> menuItemList) {
         PopupMenu popup = new PopupMenu();
 
-        MenuItem defaultItem = new MenuItem("Default Action");
+        MenuItem defaultItem = new MenuItem("Load JAR");
         defaultItem.addActionListener(defaultListener);
 
         MenuItem exit = new MenuItem("Exit");

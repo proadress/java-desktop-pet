@@ -28,7 +28,7 @@ public class Main implements TrayPlugin {
     @Override
     public List<MenuItem> getMenuItems() {
         List<MenuItem> items = new ArrayList<>();
-        MenuItem item = new MenuItem("aid pic");
+        MenuItem item = new MenuItem("change icon");
         item.addActionListener(e -> {
             Tray tray = Tray.getInstance();
             tray.updateTrayIconImage("aid.png");
