@@ -1,30 +1,31 @@
 package test;
 
 import main.tray.Tray;
-import main.tray.TrayMenuItem;
 
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class TrayTest {
     public static void main(String[] args) {
         List<MenuItem> menuItems = new ArrayList<>();
-        menuItems.add(new TrayMenuItem("aid pic", e -> {
+        menuItems.add(new MenuItem("aid pic"));
+        menuItems.get(0).addActionListener(e -> {
             Tray tray = Tray.getInstance();
             tray.updateTrayIconImage("aid.png");
-        }));
+        });
 
-        menuItems.add(new TrayMenuItem("computer pic", e -> {
+        menuItems.add(new MenuItem("computer pic"));
+        menuItems.get(0).addActionListener(e -> {
             Tray tray = Tray.getInstance();
             tray.updateTrayIconImage("computer.png");
-        }));
+        });
 
-        menuItems.add(new TrayMenuItem("customize own", e -> {
-
+        menuItems.add(new MenuItem("customize own"));
+        menuItems.get(0).addActionListener(e -> {
             JFileChooser fileChooser = new JFileChooser();
             //指定只能打開何種檔案類型
 
@@ -41,6 +42,8 @@ public class TrayTest {
                 tray.updateTrayIconImage(selectedFile.getAbsolutePath());
             }
 
-        }));
+        });
+        Tray tray = Tray.getInstance();
+        tray.start(menuItems);
     }
 }

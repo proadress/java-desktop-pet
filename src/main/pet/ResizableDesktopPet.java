@@ -7,12 +7,87 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class ResizableDesktopPet extends JFrame {
+    private static volatile ResizableDesktopPet instance;
     private final JLabel petLabel = new JLabel();
     private final int windowWidth = 100;
     private final int windowHeight = 100;
     private int dx;  // 水平移動速度
     private int dy;  // 垂直移動速度
     private PetPlugin petPlugin;
+    private Timer timer;
+    private int delay = 16; // 设置计时器的延迟
+    private boolean isRunning = false;
+
+
+    private ResizableDesktopPet() {
+    }
+
+    public static ResizableDesktopPet getInstance() {
+        if (instance == null) {
+            synchronized (ResizableDesktopPet.class) {
+                if (instance == null) {
+                    instance = new ResizableDesktopPet();
+                }
+            }
+        }
+        return instance;
+    }
+
+    // 建構函式，設定寵物的初始大小和速度
+    public void build(PetPlugin petPlugin) {
+        // 如果窗口已经显示，先停止计时器并销毁窗口
+        if (isVisible()) {
+            stopTimer();
+            dispose();
+        }
+
+        this.petPlugin = petPlugin;
+
+        // 设置窗口无边框和背景透明
+        setUndecorated(true);
+        setBackground(new Color(0, 0, 0, 0));
+
+        // 使用插件初始化窗口
+        petPlugin.build();
+        petLabel.setIcon(petPlugin.getImage());
+
+        // 设置布局和添加组件
+        setLayout(new BorderLayout());
+        add(petLabel, BorderLayout.CENTER);
+
+        // 调整窗口大小并居中显示
+        pack();
+        setLocationRelativeTo(null);
+
+        // 显示窗口并启动计时器
+        setVisible(true);
+        startTimer();
+    }
+
+    // 启动计时器
+    private void startTimer() {
+        isRunning = true;
+        setVisible(true);
+        timer = new Timer(delay, e -> {
+            movePet();
+            petLabel.setIcon(dx >= 0 ? petPlugin.getImage() : flipImageHorizontally(petPlugin.getImage()));
+        });
+        timer.start();
+    }
+
+    // 停止计时器
+    public void stopTimer() {
+        setVisible(false);
+        if (timer != null) {
+            timer.stop();
+        }
+    }
+
+    public void resetTimer() {
+        stopTimer();
+        startTimer();
+    }
+
 
     // 設定初始位置的方法
     public void setInitialPosition(int x, int y) {
@@ -24,30 +99,6 @@ public class ResizableDesktopPet extends JFrame {
     public void setMoveSpeed(int dx, int dy) {
         this.dx = dx;
         this.dy = dy;
-    }
-
-    // 建構函式，設定寵物的初始大小和速度
-    public ResizableDesktopPet(PetPlugin petPlugin) {
-        setUndecorated(true);
-        setBackground(new Color(0, 0, 0, 0));
-        this.petPlugin = petPlugin;
-        petPlugin.build();
-
-        petLabel.setIcon(petPlugin.getImage());
-
-        setLayout(new BorderLayout());
-        add(petLabel, BorderLayout.CENTER);
-
-        pack();
-        setLocationRelativeTo(null);
-        setVisible(true);
-
-        // 創建計時器移動寵物和更新動畫幀
-        Timer timer = new Timer(16, e -> {
-            movePet();
-            petLabel.setIcon(dx >= 0 ? petPlugin.getImage() : flipImageHorizontally(petPlugin.getImage()));
-        });
-        timer.start();
     }
 
 

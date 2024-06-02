@@ -1,39 +1,23 @@
 package main.tray;
 
-import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
+import main.pet.ResizableDesktopPet;
+
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 public class Tray {
     private static volatile Tray instance;
     private TrayIcon trayIcon;
-    private String picture = "computer.png"; // make picture non-final to update it
-    private final ActionListener defaultListener = e -> {
-        JFileChooser fileChooser = new JFileChooser();
-        //指定只能打開何種檔案類型
-
-        FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                "JAR", "jar");
-        fileChooser.setFileFilter(filter);
-        fileChooser.setDialogTitle("選擇新增檔案");
-        int returnValue = fileChooser.showOpenDialog(null);//叫出filechooser
-        if (returnValue == JFileChooser.APPROVE_OPTION) { //判斷是否選擇檔案
-            File selectedFile = fileChooser.getSelectedFile();//指派給File
-            File destinationFile = new File("out/artifacts/tray/" + selectedFile.getName());
-            System.out.println(selectedFile.getName()); //印出檔名
-            try{
-                Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                JOptionPane.showMessageDialog(null, "檔案已成功存至: " + destinationFile.getAbsolutePath());
-            }catch (IOException ex){
-                JOptionPane.showMessageDialog(null, "檔案存取失敗: " + ex.getMessage());
-            }
+    private String picture = "picture/run.png"; // make picture non-final to update it
+    private final ActionListener defultAction = e -> {
+        ResizableDesktopPet pet = ResizableDesktopPet.getInstance();
+        if (pet.isVisible()) {
+            updateTrayIconImage("picture/stop.png");
+            pet.stopTimer();
+        } else {
+            updateTrayIconImage("picture/run.png");
+            pet.resetTimer();
         }
     };
 
@@ -60,7 +44,7 @@ public class Tray {
 
             trayIcon = new TrayIcon(image, "Tray Demo", popup);
             trayIcon.setImageAutoSize(true);
-            trayIcon.addActionListener(defaultListener);
+            trayIcon.addActionListener(defultAction);
 
             try {
                 systemTray.add(trayIcon);
@@ -74,50 +58,48 @@ public class Tray {
 
     private PopupMenu createPopupMenu(List<MenuItem> menuItemList) {
         PopupMenu popup = new PopupMenu();
+        MenuItem defaultItem = new MenuItem("stop or start pet");
+        defaultItem.addActionListener(defultAction);
 
-        MenuItem defaultItem = new MenuItem("Load JAR");
-        defaultItem.addActionListener(defaultListener);
-
-        MenuItem deleteItem = new MenuItem("Delete JAR");
-
-        deleteItem.addActionListener(e -> {
-            JFileChooser fileChooser1 = new JFileChooser();
-            //指定只能打開何種檔案類型
-
-            FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                    "JAR", "jar");
-            fileChooser1.setFileFilter(filter);
-
-            fileChooser1.setDialogTitle("選擇刪除檔案");
-
-            int result = fileChooser1.showOpenDialog(null);
-
-            if (result == JFileChooser.APPROVE_OPTION) {
-                // 取得選擇的檔案
-                File selectedFile = fileChooser1.getSelectedFile();
-                // 刪除檔案
-                if (selectedFile.delete()) {
-                    JOptionPane.showMessageDialog(null, "檔案已成功刪除: " + selectedFile.getAbsolutePath());
-                }
-                else {
-                    JOptionPane.showMessageDialog(null, "檔案刪除失敗");
-                }
-            }
-        });
+//        MenuItem deleteItem = new MenuItem("Delete JAR");
+//
+//        deleteItem.addActionListener(e -> {
+//            JFileChooser fileChooser1 = new JFileChooser();
+//            //指定只能打開何種檔案類型
+//
+//            FileNameExtensionFilter filter = new FileNameExtensionFilter(
+//                    "JAR", "jar");
+//            fileChooser1.setFileFilter(filter);
+//
+//            fileChooser1.setDialogTitle("選擇刪除檔案");
+//
+//            int result = fileChooser1.showOpenDialog(null);
+//
+//            if (result == JFileChooser.APPROVE_OPTION) {
+//                // 取得選擇的檔案
+//                File selectedFile = fileChooser1.getSelectedFile();
+//                // 刪除檔案
+//                if (selectedFile.delete()) {
+//                    JOptionPane.showMessageDialog(null, "檔案已成功刪除: " + selectedFile.getAbsolutePath());
+//                } else {
+//                    JOptionPane.showMessageDialog(null, "檔案刪除失敗");
+//                }
+//            }
+//        });
 
         MenuItem exit = new MenuItem("Exit");
         exit.addActionListener(e -> System.exit(0));
 
         popup.add(defaultItem);
         popup.addSeparator();
-        popup.add(deleteItem);
+//        popup.add(deleteItem);
         popup.addSeparator();
         for (MenuItem item : menuItemList) {
             popup.add(item);
         }
         popup.addSeparator();
         popup.add(exit);
-        
+
         return popup;
     }
 

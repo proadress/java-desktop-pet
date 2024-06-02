@@ -21,7 +21,7 @@ public class Person1 implements PetPlugin {
 
     @Override
     public String getName() {
-        return "DogAnimation";
+        return "box girl";
     }
 
     @Override

@@ -21,7 +21,7 @@ public class Main implements PetPlugin {
 
     @Override
     public String getName() {
-        return "DogAnimation";
+        return "sword man";
     }
 
     @Override
@@ -29,7 +29,7 @@ public class Main implements PetPlugin {
         animationFrames = new ArrayList<>();
         try {
             // 讀取原始圖片
-            BufferedImage originalImage = ImageIO.read(new File("picture/0099.png"));
+            BufferedImage originalImage = ImageIO.read(new File("picture/0121.png"));
 
             // 獲取原始圖片的寬度和高度
             int imageWidth = originalImage.getWidth();
