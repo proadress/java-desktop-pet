@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    ResizableDesktopPet pet;
-
     public static void main(String[] args) throws Exception {
         FileData.loadSettings();
         List<MenuItem> menuItems = new ArrayList<>();
@@ -41,7 +39,7 @@ public class Main {
                     }
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "你取消了选择");
+                JOptionPane.showMessageDialog(null, "你取消了選擇");
             }
         });
         PluginManager pluginManager = new PluginManager("out/artifacts/tray");

@@ -33,7 +33,7 @@ public class Main implements TrayPlugin {
     @Override
     public List<MenuItem> getMenuItems() {
         List<MenuItem> items = new ArrayList<>();
-        MenuItem item = new MenuItem("open fild");
+        MenuItem item = new MenuItem("open file");
         item.addActionListener(e -> {
             JFileChooser fileChooser = new JFileChooser();
             //指定只能打開何種檔案類型

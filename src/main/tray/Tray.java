@@ -21,31 +21,6 @@ public class Tray {
         }
     };
 
-    private final ActionListener deleteListener = e -> {
-        JFileChooser fileChooser1 = new JFileChooser();
-        //指定只能打開何種檔案類型
-
-        FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                "JAR", "jar");
-        fileChooser1.setFileFilter(filter);
-
-        fileChooser1.setDialogTitle("選擇刪除檔案");
-
-        int result = fileChooser1.showOpenDialog(null);
-
-        if (result == JFileChooser.APPROVE_OPTION) {
-            // 取得選擇的檔案
-            File selectedFile = fileChooser1.getSelectedFile();
-            // 刪除檔案
-            if (selectedFile.delete()) {
-                JOptionPane.showMessageDialog(null, "檔案已成功刪除: " + selectedFile.getAbsolutePath());
-            }
-            else {
-                JOptionPane.showMessageDialog(null, "檔案刪除失敗");
-            }
-        }
-    };
-
     private Tray() {
     }
 
@@ -85,32 +60,6 @@ public class Tray {
         PopupMenu popup = new PopupMenu();
         MenuItem defaultItem = new MenuItem("stop or start pet");
         defaultItem.addActionListener(defultAction);
-
-//        MenuItem deleteItem = new MenuItem("Delete JAR");
-//
-//        deleteItem.addActionListener(e -> {
-//            JFileChooser fileChooser1 = new JFileChooser();
-//            //指定只能打開何種檔案類型
-//
-//            FileNameExtensionFilter filter = new FileNameExtensionFilter(
-//                    "JAR", "jar");
-//            fileChooser1.setFileFilter(filter);
-//
-//            fileChooser1.setDialogTitle("選擇刪除檔案");
-//
-//            int result = fileChooser1.showOpenDialog(null);
-//
-//            if (result == JFileChooser.APPROVE_OPTION) {
-//                // 取得選擇的檔案
-//                File selectedFile = fileChooser1.getSelectedFile();
-//                // 刪除檔案
-//                if (selectedFile.delete()) {
-//                    JOptionPane.showMessageDialog(null, "檔案已成功刪除: " + selectedFile.getAbsolutePath());
-//                } else {
-//                    JOptionPane.showMessageDialog(null, "檔案刪除失敗");
-//                }
-//            }
-//        });
 
         MenuItem exit = new MenuItem("Exit");
         exit.addActionListener(e -> System.exit(0));
